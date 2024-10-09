@@ -1,17 +1,17 @@
 # Simple Todo App
 
-Give a brief description of the project here. Feel free to give it a different name.
+Allows a user to add, complete, and remove to-do's to a list, along with an optional task due date
 
 ## Functionality
 
-Give a more detailed explanation of the project and its functionality.
+The app tracks tasks, allows users to create new ones or remove completed tasks and creates a visual display of upcoming responsibilities
 
 ## Technology
 
-Give a description of the technologies and techniques used. Pictures, GIFs, or screenshots that detail the project features are recommended.
+The primary technology or "skill" displayed in the deployment of this app is more in the use of OOP to create a scalable and modular program.
 
 ## Deployment
 
 This project is deployed on GitHub Pages:
 
-- ADD LINK HERE
+- [Simple Todo App](https://jared217.github.io/se_project_todo-app/)
