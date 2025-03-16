@@ -1,65 +1,46 @@
-import { v4 as uuidv4 } from "https://jspm.dev/uuid";
-
 import { initialTodos, validationConfig } from "../utils/constants.js";
 import Todo from "../components/Todo.js";
+import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 
 const addTodoButton = document.querySelector(".button_action_add");
-const addTodoPopup = document.querySelector("#add-todo-popup");
 const addTodoForm = document.forms["add-todo-form"];
-const addTodoCloseBtn = addTodoPopup.querySelector(".popup__close");
-// const todoTemplate = document.querySelector("#todo-template");
-const todosList = document.querySelector(".todos__list");
 
-const openModal = (modal) => {
-  modal.classList.add("popup_visible");
-};
+const todoList = new Section({
+  items: initialTodos,
+  renderer: renderTodo,
+  containerSelector: ".todos__list",
+});
 
-const closeModal = (modal) => {
-  modal.classList.remove("popup_visible");
-};
+todoList.renderItems(); // Initial Page Load
 
-// The logic in this function should all be handled in the Todo class.
-const generateTodo = (data) => {
-  const todo = new Todo(data, "#todo-template");
-  const todoElement = todo.getView();
+function renderTodo(item) {
+  // recieves "todo" from Section class
+  const todo = generateTodo(item); // sends to generateTodo for template
+  todoList.addItem(todo); // sends new element back to Section to add to the DOM
+}
+
+function generateTodo(data) {
+  const todo = new Todo(data, "#todo-template"); // established template for markup
+  const todoElement = todo.getView(); // creates html element to send back
 
   return todoElement;
-};
+}
 
-const renderTodo = (item) => {
-  const todo = generateTodo(item);
-  todosList.append(todo);
-};
+// i added an additional parameter for more flexibility within the class
+const newTodoPopup = new PopupWithForm({
+  selector: "#add-todo-popup",
+  form: "add-todo-form",
+  formSubmit: (inputValues) => {
+    renderTodo(inputValues);
+    newTodoPopup.close();
+    newTodoValidator.resetValidation();
+  },
+});
 
 addTodoButton.addEventListener("click", () => {
-  openModal(addTodoPopup);
-});
-
-addTodoCloseBtn.addEventListener("click", () => {
-  closeModal(addTodoPopup);
-});
-
-addTodoForm.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  const name = evt.target.name.value;
-  const dateInput = evt.target.date.value;
-
-  // Create a date object and adjust for timezone
-  const date = new Date(dateInput);
-  date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-
-  const id = uuidv4();
-
-  const values = { name, date, id };
-  renderTodo(values);
-  closeModal(addTodoPopup);
-
-  newTodoValidator.resetValidation();
-});
-
-initialTodos.forEach((item) => {
-  renderTodo(item);
+  newTodoPopup.open();
 });
 
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
