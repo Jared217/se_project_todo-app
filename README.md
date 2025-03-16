@@ -1,19 +1,26 @@
 # Simple Todo App
 
-As part of the TripleTen Software Engineering Bootcamp, this simple "To-Do App" creates a user interface for adding and removing tasks, as well as marking them as complete.
+As part of the **TripleTen Software Engineering Bootcamp**, this **"To-Do App"** provides an intuitive user interface for managing tasks. Users can **add, delete, and mark tasks as complete**, with optional due dates for better organization. The project focuses on **modular JavaScript structure**, event-driven updates, and **object-oriented programming (OOP) principles**.
 
-## Functionality
+## **✨ Features**
 
-Give a more detailed explanation of the project and its functionality.
-A user is able to use the "Add Todo" button to create a new task with an optional Due Date. The task is then added to list with the ability to mark as complete or delete from the list. If a due date is provided, that date will display with the corresponding task.
+- ✅ **Add new tasks** with an optional **due date**.
+- ✅ **Mark tasks as complete/incomplete** dynamically.
+- ✅ **Delete tasks** while updating the UI in real-time.
+- ✅ **Live counter** tracking **total tasks** and **completed tasks**.
+- ✅ **Form validation** to ensure user input is correct.
+- ✅ **Popup modal** for task creation with proper event handling.
+- ✅ **Fully modular JavaScript implementation** using ES6 Classes.
 
-## Technology
+## **⚙️ Technologies Used**
 
-Give a description of the technologies and techniques used. Pictures, GIFs, or screenshots that detail the project features are recommended.
-The main purpose of this project was to familiarize myself with JavaScript modules. Within the project framework I utilized separate JavaScript classes for different functionality, from the Todo list to the Form Validation, and used import/export functionality to create a seamless UI.
+This project was built to reinforce **JavaScript modules and OOP principles**.  
+The following technologies and techniques were used:
 
-## Deployment
-
-This project is deployed on GitHub Pages:
-
-- https://jared217.github.io/se_project_todo-app
+- 🟡 **JavaScript (ES6+)** – Classes, Modules, Import/Export.
+- 🎨 **HTML & CSS** – Styled with **BEM methodology**.
+- 🏗 **Object-Oriented Programming (OOP)** – Encapsulated logic inside **reusable ES6 classes**.
+- 🎭 **Dynamic DOM Manipulation** – Using `querySelector`, `addEventListener`, and `appendChild`.
+- 🔄 **Event-Driven UI Updates** – Real-time interaction handling (e.g., marking a task complete updates the counter).
+- ✅ **Form Validation** – Prevents invalid input and enhances UX.
+- 🏗 **Modular File Structure** – Separated logic into **multiple classes** for easy maintenance.

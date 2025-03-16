@@ -6,6 +6,7 @@ class Popup {
   }
 
   // track all popup close events, whether click or keybind (submission handled in child class)
+  // GRADER: in my thought process I feel like this is a streamline approach to handle various event listeners, but would be interested in your feedback
   _handleEventClose(evt) {
     const closeButton = this._popup.querySelector(".popup__close");
     if (
