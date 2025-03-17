@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "https://jspm.dev/uuid";
+
 import { initialTodos, validationConfig } from "../utils/constants.js";
 import Todo from "../components/Todo.js";
 import Section from "../components/Section.js";
@@ -6,7 +8,6 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import TodoCounter from "../components/TodoCounter.js";
 
 const addTodoButton = document.querySelector(".button_action_add");
-const addTodoForm = document.forms["add-todo-form"];
 
 const todoList = new Section({
   items: initialTodos,
@@ -34,7 +35,9 @@ const newTodoPopup = new PopupWithForm({
   selector: "#add-todo-popup",
   form: "add-todo-form",
   formSubmit: (inputValues) => {
-    renderTodo(inputValues);
+    // now dynamically assigns an id if the element does not have one
+    const newTodo = { ...inputValues, id: uuidv4() };
+    renderTodo(newTodo);
     todoCounter.updateTotal(true);
     newTodoPopup.close();
     newTodoValidator.resetValidation();
@@ -54,5 +57,8 @@ addTodoButton.addEventListener("click", () => {
 });
 
 const todoCounter = new TodoCounter(initialTodos, ".counter__text");
-const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
+const newTodoValidator = new FormValidator(
+  validationConfig,
+  newTodoPopup.getForm()
+);
 newTodoValidator.enableValidation();

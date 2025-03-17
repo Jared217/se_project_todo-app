@@ -1,5 +1,4 @@
 import Popup from "./Popup.js";
-import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 
 class PopupWithForm extends Popup {
   constructor({ selector, form, formSubmit }) {
@@ -11,18 +10,24 @@ class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
-    // values from input form
-    const name = this._form.name.value;
-    const dateInput = this._form.date.value;
-    // generate random id for new tasks
-    const id = uuidv4();
+    // inputs now gathers all user input from form, regardless of type
+    const inputs = this._form.querySelectorAll("input, textarea, select");
+    const values = {};
 
-    // create a date object and adjust for timezone
-    const date = new Date(dateInput);
-    date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-
-    // wrap all input values into a new object
-    return { name, date, id };
+    // iterate through each input, storing its value in the object
+    inputs.forEach((input) => {
+      if (input.type === "date") {
+      // create a date object and adjust for timezone
+        const date = new Date(input.value);
+        date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+        values[input.name] = date;
+      } else {
+        values[input.name] = input.value;
+      }
+    });
+  
+    // return the input values object
+    return values;
   }
 
   // send input values to callback function and handle standard submission and form reset
@@ -31,6 +36,10 @@ class PopupWithForm extends Popup {
     const inputValues = this._getInputValues();
     this._formSubmit(inputValues);
     this._form.reset();
+  }
+
+  getForm() {
+    return this._form;
   }
 
   // overwrite parent to also remove sumbit handler

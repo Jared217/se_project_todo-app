@@ -3,16 +3,15 @@ class Popup {
     this._popup = document.querySelector(selector);
     // explicitly bind event handling for instance
     this._handleEventClose = this._handleEventClose.bind(this);
+    this._closeButton = this._popup.querySelector(".popup__close");
   }
 
   // track all popup close events, whether click or keybind (submission handled in child class)
-  // GRADER: in my thought process I feel like this is a streamline approach to handle various event listeners, but would be interested in your feedback
   _handleEventClose(evt) {
-    const closeButton = this._popup.querySelector(".popup__close");
     if (
       evt.key === "Escape" ||
       evt.target === this._popup ||
-      evt.target === closeButton
+      evt.target === this._closeButton
     ) {
       this.close();
     }
